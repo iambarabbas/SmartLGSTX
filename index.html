@@ -209,6 +209,26 @@
             overflow: hidden;
         }
         
+        .hero-with-image {
+            background-size: cover;
+            background-position: center right;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                var(--navy) 0%, 
+                var(--navy) 35%, 
+                rgba(0, 24, 80, 0.85) 55%,
+                rgba(0, 24, 80, 0.6) 75%,
+                rgba(0, 24, 80, 0.4) 100%
+            );
+        }
+        
         .hero::before {
             content: '';
             position: absolute;
@@ -217,12 +237,14 @@
             width: 50%;
             height: 100%;
             background: radial-gradient(circle at 70% 30%, rgba(250,220,97,0.08) 0%, transparent 50%);
+            z-index: 1;
         }
         
         .hero-container {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            z-index: 2;
         }
         
         .hero-badge {
@@ -269,19 +291,6 @@
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
-        }
-        
-        .hero-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-        }
-        
-        .hero-image img {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
         /* Stats Bar */
@@ -813,13 +822,11 @@
                 padding: 60px 24px 80px;
             }
             
-            .hero-split {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            
-            .hero-image {
-                order: -1;
+            .hero-overlay {
+                background: linear-gradient(90deg, 
+                    var(--navy) 0%, 
+                    rgba(0, 24, 80, 0.9) 100%
+                );
             }
             
             .problem-grid {
@@ -897,22 +904,18 @@
     </nav>
 
     <!-- Hero -->
-    <section class="hero">
-        <div class="hero-container hero-split">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    Former UPS Executive — 13 Years Setting Carrier Rates
-                </div>
-                <h1>You're Overpaying UPS and FedEx. <span class="highlight">We Know Because We Built Their Pricing.</span></h1>
-                <p class="hero-subtitle">SmartLogistics recovers 10–20% of your annual shipping spend by negotiating the 250+ line items your carrier rep hopes you never ask about. Contingency-only — you pay nothing unless we save you money.</p>
-                <div class="hero-buttons">
-                    <a href="get-your-free-audit.html" class="btn btn-primary btn-large">Get Your Free Shipping Audit</a>
-                    <a href="shipping-savings-calculator.html" class="btn btn-outline btn-large">Calculate Your Savings →</a>
-                </div>
+    <section class="hero hero-with-image" style="background-image: url('images/SmartLogistics Homepage Hero Section.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Former UPS Executive — 13 Years Setting Carrier Rates
             </div>
-            <div class="hero-image">
-                <img src="images/SmartLogistics Homepage Hero Section.jpg" alt="Executive negotiation meeting">
+            <h1>You're Overpaying UPS and FedEx. <span class="highlight">We Know Because We Built Their Pricing.</span></h1>
+            <p class="hero-subtitle">SmartLogistics recovers 10–20% of your annual shipping spend by negotiating the 250+ line items your carrier rep hopes you never ask about. Contingency-only — you pay nothing unless we save you money.</p>
+            <div class="hero-buttons">
+                <a href="get-your-free-audit.html" class="btn btn-primary btn-large">Get Your Free Shipping Audit</a>
+                <a href="shipping-savings-calculator.html" class="btn btn-outline btn-large">Calculate Your Savings →</a>
             </div>
         </div>
     </section>
