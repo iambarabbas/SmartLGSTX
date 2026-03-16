@@ -5,419 +5,1119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartLogistics | UPS Insider Now Negotiating For You</title>
     <meta name="description" content="SmartLogistics was founded by a former UPS executive who spent 13 years setting carrier rates. Now he negotiates from your side. Contingency-only — we earn when you save.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'navy': '#001850',
-                        'navy-light': '#002470',
-                        'gold': '#FADC61',
-                        'gold-dark': '#E5C94D',
-                        'orange': '#FF6900',
-                        'dark': '#32373c',
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --navy: #001850;
+            --navy-light: #0a2463;
+            --gold: #FADC61;
+            --gold-dark: #E5C94D;
+            --orange: #FF6900;
+            --dark: #1a1a2e;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--navy);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-dropdown {
+            position: relative;
+        }
+        
+        .nav-dropdown-trigger {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .nav-dropdown-trigger svg {
+            width: 12px;
+            height: 12px;
+            opacity: 0.7;
+        }
+        
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            padding: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 8px;
+        }
+        
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--gray-800);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+        
+        .nav-dropdown-menu a:hover {
+            background: var(--gray-100);
+            color: var(--navy);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--navy);
+            border-color: white;
+        }
+        
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 1rem;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: white;
+            padding: 80px 24px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(250,220,97,0.08) 0%, transparent 50%);
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 800;
+            line-height: 1.1;
+            max-width: 900px;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+        
+        .hero h1 .highlight {
+            color: var(--gold);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        /* Stats Bar */
+        .stats {
+            background: var(--navy-light);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 48px 24px;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 100px 24px;
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-gray {
+            background: var(--gray-50);
+        }
+        
+        .section-navy {
+            background: var(--navy);
+            color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+        
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--orange);
+            margin-bottom: 16px;
+        }
+        
+        .section-navy .section-label {
+            color: var(--gold);
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-navy .section-title {
+            color: white;
+        }
+        
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+        }
+        
+        .section-navy .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        
+        .problem-content h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        .problem-content p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        
+        .problem-content p strong {
+            color: var(--gray-800);
+        }
+        
+        .problem-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .problem-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+        
+        .problem-list {
+            list-style: none;
+        }
+        
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.95rem;
+            color: var(--gray-600);
+        }
+        
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .problem-list .x-icon {
+            width: 20px;
+            height: 20px;
+            background: #fee2e2;
+            color: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        /* Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: var(--gold);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        
+        .step p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        
+        /* Industries */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            align-items: center;
+        }
+        
+        .industries-content h3 {
+            font-size: 1.125rem;
+            color: var(--gold);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .industries-list {
+            list-style: none;
+        }
+        
+        .industries-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1rem;
+        }
+        
+        .industries-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: rgba(250,220,97,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 0.7rem;
+        }
+        
+        .industries-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .industry-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.2s;
+        }
+        
+        .industry-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .industry-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .industry-card span:last-child {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+        
+        .benefit-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--navy);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--gold);
+        }
+        
+        .benefit-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        
+        .benefit-card p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 12px;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .faq-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        
+        .faq-item p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+        
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 100px 24px;
+            background: var(--navy);
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .cta p {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .cta-note a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .cta-note a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 64px 24px 32px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-brand p {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+        
+        .footer-col h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: var(--gray-400);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-col a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 32px;
+            text-align: center;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--navy-light);
+                padding: 24px;
+            }
+            
+            .mobile-menu a {
+                display: block;
+                color: white;
+                padding: 12px 0;
+                text-decoration: none;
+                font-size: 1rem;
+            }
+            
+            .hero {
+                padding: 60px 24px 80px;
+            }
+            
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .industries-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .stats-container,
+            .steps-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
 </head>
-<body class="bg-white text-dark">
+<body>
     <!-- Navigation -->
-    <nav class="bg-navy text-white sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <a href="/" class="text-2xl font-bold">
-                    Smart<span class="text-gold">LGSTX</span>
-                </a>
-                
-                <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="how-it-works.html" class="hover:text-gold transition">How It Works</a>
-                    <div class="relative group">
-                        <span class="hover:text-gold transition cursor-pointer">Industries ▾</span>
-                        <div class="absolute hidden group-hover:block bg-white text-dark rounded-lg shadow-xl py-2 w-56 top-full left-0 mt-2">
-                            <a href="furniture-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Furniture & Home Goods</a>
-                            <a href="mattress-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Mattress & Bedding</a>
-                            <a href="auto-parts-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Auto Parts</a>
-                            <a href="building-materials-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Building Materials</a>
-                            <a href="fitness-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Fitness Equipment</a>
-                            <a href="food-beverage-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Food & Beverage</a>
-                            <a href="manufacturing-shipping-savings.html" class="block px-4 py-2 hover:bg-gold/20">Manufacturing</a>
-                        </div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="logo">Smart<span>LGSTX</span></a>
+            
+            <div class="nav-links">
+                <a href="how-it-works.html">How It Works</a>
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-trigger">
+                        Industries
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </span>
+                    <div class="nav-dropdown-menu">
+                        <a href="furniture-shipping-savings.html">Furniture & Home Goods</a>
+                        <a href="mattress-shipping-savings.html">Mattress & Bedding</a>
+                        <a href="auto-parts-shipping-savings.html">Auto Parts</a>
+                        <a href="building-materials-shipping-savings.html">Building Materials</a>
+                        <a href="fitness-shipping-savings.html">Fitness Equipment</a>
+                        <a href="food-beverage-shipping-savings.html">Food & Beverage</a>
+                        <a href="manufacturing-shipping-savings.html">Manufacturing</a>
                     </div>
-                    <a href="about.html" class="hover:text-gold transition">About Chris</a>
-                    <a href="get-your-free-audit.html" class="bg-gold hover:bg-gold-dark text-navy font-semibold px-6 py-3 rounded-lg transition">
-                        Get Your Free Audit
-                    </a>
                 </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-white" id="mobile-menu-btn">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
+                <a href="about.html">About Chris</a>
+                <a href="get-your-free-audit.html" class="btn btn-primary">Get Your Free Audit</a>
             </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
         </div>
-
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-navy-light" id="mobile-menu">
-            <div class="px-4 py-4 space-y-3">
-                <a href="how-it-works.html" class="block py-2 hover:text-gold">How It Works</a>
-                <a href="about.html" class="block py-2 hover:text-gold">About Chris</a>
-                <a href="furniture-shipping-savings.html" class="block py-2 hover:text-gold pl-4">→ Furniture</a>
-                <a href="mattress-shipping-savings.html" class="block py-2 hover:text-gold pl-4">→ Mattress</a>
-                <a href="auto-parts-shipping-savings.html" class="block py-2 hover:text-gold pl-4">→ Auto Parts</a>
-                <a href="get-your-free-audit.html" class="block py-3 bg-gold text-navy rounded px-4 text-center font-semibold mt-4">Get Your Free Audit</a>
-            </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="how-it-works.html">How It Works</a>
+            <a href="about.html">About Chris</a>
+            <a href="furniture-shipping-savings.html">→ Furniture</a>
+            <a href="mattress-shipping-savings.html">→ Mattress</a>
+            <a href="auto-parts-shipping-savings.html">→ Auto Parts</a>
+            <a href="get-your-free-audit.html">Get Your Free Audit</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="bg-navy text-white py-20 md:py-28">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                    You're Probably Overpaying UPS and FedEx. 
-                    <span class="text-gold">We Know Because We Spent 13 Years on Their Side of the Table.</span>
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed">
-                    SmartLogistics was founded by a former UPS executive who spent 13 years setting carrier rates — from the inside. Now he negotiates from your side of the table, with the exact playbook carriers use to protect their margins.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                    <a href="get-your-free-audit.html" class="inline-block bg-gold hover:bg-gold-dark text-navy font-bold px-8 py-4 rounded-lg text-lg transition text-center">
-                        Get Your Free Shipping Audit
-                    </a>
-                    <a href="shipping-savings-calculator.html" class="inline-block border-2 border-white hover:bg-white hover:text-navy font-semibold px-8 py-4 rounded-lg text-lg transition text-center">
-                        Calculate Your Savings →
-                    </a>
-                </div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Former UPS Executive — 13 Years Setting Carrier Rates
+            </div>
+            <h1>You're Overpaying UPS and FedEx. <span class="highlight">We Know Because We Built Their Pricing.</span></h1>
+            <p class="hero-subtitle">SmartLogistics recovers 10–20% of your annual shipping spend by negotiating the 250+ line items your carrier rep hopes you never ask about. Contingency-only — you pay nothing unless we save you money.</p>
+            <div class="hero-buttons">
+                <a href="get-your-free-audit.html" class="btn btn-primary btn-large">Get Your Free Shipping Audit</a>
+                <a href="shipping-savings-calculator.html" class="btn btn-outline btn-large">Calculate Your Savings →</a>
             </div>
         </div>
     </section>
 
-    <!-- Credibility Bar -->
-    <section class="bg-navy-light text-white py-8 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-gold">$2.5M+</div>
-                    <div class="text-sm text-gray-300 mt-1">Recovered for clients last year</div>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-gold">80%</div>
-                    <div class="text-sm text-gray-300 mt-1">Close rate — 4 in 5 become clients</div>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-gold">$0</div>
-                    <div class="text-sm text-gray-300 mt-1">Upfront cost — contingency only</div>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-gold">Days</div>
-                    <div class="text-sm text-gray-300 mt-1">To initial savings, not months</div>
-                </div>
+    <!-- Stats Bar -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-value">$2.5M+</div>
+                <div class="stat-label">Recovered for clients last year</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">80%</div>
+                <div class="stat-label">Close rate — 4 in 5 become clients</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">$0</div>
+                <div class="stat-label">Upfront cost — contingency only</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Days</div>
+                <div class="stat-label">To initial savings, not months</div>
             </div>
         </div>
     </section>
 
-    <!-- The Problem Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-navy mb-6">
-                    UPS and FedEx Are Not Your Partners. They're Your Biggest Unmanaged Cost.
-                </h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-lg text-gray-700 mb-6">
-                        If your company spends $100K–$500K per year on UPS or FedEx, your carrier contract has <strong>250+ line items</strong>. Your carrier rep negotiated maybe 15 of them with you.
-                    </p>
-                    <p class="text-lg text-gray-700 mb-6">
-                        The rest — large package surcharges, additional handling fees, residential delivery premiums, dimensional weight multipliers, peak season penalties — are sitting exactly where the carrier wants them.
-                    </p>
-                    <p class="text-lg text-gray-700 font-semibold">
-                        Your rep's job is to maximize what you pay. Not minimize it.
-                    </p>
+    <!-- Problem Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="problem-grid">
+                <div class="problem-content">
+                    <h2>Your Carrier Contract Has 250+ Line Items. Your Rep Negotiated Maybe 15.</h2>
+                    <p>If your company spends $100K–$500K per year on UPS or FedEx, most of your shipping costs aren't in your base rates — they're in surcharges.</p>
+                    <p><strong>Large package fees. Additional handling. Residential delivery premiums. Dimensional weight multipliers. Peak season penalties.</strong></p>
+                    <p>Your carrier rep's job is to maximize what you pay. Not minimize it. And most companies — even sophisticated ones — have never had someone audit those contracts from the inside.</p>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-xl font-bold text-navy mb-4">The Hidden Line Items</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <span class="text-orange mr-3">✗</span>
-                            <span>Large Package Surcharges ($20–$50/package)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-orange mr-3">✗</span>
-                            <span>Additional Handling Fees ($15–$30/package)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-orange mr-3">✗</span>
-                            <span>Residential Delivery Premiums</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-orange mr-3">✗</span>
-                            <span>Dimensional Weight Multipliers</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-orange mr-3">✗</span>
-                            <span>Peak Season Penalties</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-orange mr-3">✗</span>
-                            <span>Delivery Area Surcharges (DAS)</span>
-                        </li>
-                    </ul>
-                    <p class="mt-6 text-sm text-gray-500">Most companies have never negotiated these categories.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-navy mb-4">We Negotiate From the Inside Out</h2>
-                <p class="text-xl text-gray-600">Most shipping consultants know rates. Chris Tweedy spent 13 years setting them.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-navy">1</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-navy mb-2">Free Estimate</h3>
-                    <p class="text-gray-600">Tell us your product category and annual shipping volume. We give you a savings estimate in 15 minutes — specific to your vertical.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-navy">2</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-navy mb-2">Contract Audit</h3>
-                    <p class="text-gray-600">Submit your shipping data. Chris personally reviews every line item the same way he reviewed them from the carrier side for over a decade.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-navy">3</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-navy mb-2">We Negotiate. You Save.</h3>
-                    <p class="text-gray-600">We go to bat with your carrier. Initial savings can be in place within days using pre-negotiated rates already in place.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-navy">4</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-navy mb-2">Ongoing Savings</h3>
-                    <p class="text-gray-600">We invoice quarterly at a percentage of the savings we've recovered. No savings, no invoice. Our incentives are aligned with yours.</p>
-                </div>
-            </div>
-            <div class="text-center mt-12">
-                <a href="how-it-works.html" class="text-navy font-semibold hover:text-orange transition">See detailed process →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Who We Help Section -->
-    <section class="py-20 bg-navy text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">We Work With Companies Where Shipping Is a Real Cost Center</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-xl font-semibold text-gold mb-6">You're a fit if:</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <span class="text-gold mr-3 text-xl">✓</span>
-                            <span>Your annual shipping spend is $100K–$500K with UPS or FedEx</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-gold mr-3 text-xl">✓</span>
-                            <span>Your products are heavy, bulky, or oversized</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-gold mr-3 text-xl">✓</span>
-                            <span>You're a B2B or DTC product company with $5M–$30M in revenue</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-gold mr-3 text-xl">✓</span>
-                            <span>You've negotiated rates before — and still feel like you're overpaying</span>
-                        </li>
+                <div class="problem-card">
+                    <h3>The Hidden Charges on Every Invoice</h3>
+                    <ul class="problem-list">
+                        <li><span class="x-icon">✕</span> Large Package Surcharges ($20–$50/package)</li>
+                        <li><span class="x-icon">✕</span> Additional Handling Fees ($15–$30/package)</li>
+                        <li><span class="x-icon">✕</span> Residential Delivery Premiums</li>
+                        <li><span class="x-icon">✕</span> Dimensional Weight Multipliers</li>
+                        <li><span class="x-icon">✕</span> Peak Season Penalties</li>
+                        <li><span class="x-icon">✕</span> Delivery Area Surcharges (DAS)</li>
                     </ul>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <a href="furniture-shipping-savings.html" class="bg-white/10 hover:bg-white/20 rounded-lg p-6 text-center transition">
-                        <div class="text-gold text-2xl mb-2">🛋️</div>
-                        <div class="font-semibold">Furniture & Home Goods</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section-gray">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">How It Works</span>
+                <h2 class="section-title">We Negotiate From the Inside Out</h2>
+                <p class="section-subtitle">Most shipping consultants know rates. Chris Tweedy spent 13 years setting them.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Free Estimate</h3>
+                    <p>Tell us your product category and shipping volume. We give you a savings estimate in 15 minutes — specific to your vertical.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Contract Audit</h3>
+                    <p>Submit your shipping data. Chris personally reviews every line item — the same way he reviewed them from the carrier side.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>We Negotiate</h3>
+                    <p>We go to bat with your carrier. Initial savings can be in place within days using pre-negotiated rates.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Ongoing Savings</h3>
+                    <p>We invoice quarterly at a percentage of the savings. No savings, no invoice. Our incentives are aligned with yours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="section section-navy">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Who We Help</span>
+                <h2 class="section-title">Companies Where Shipping Is a Real Cost Center</h2>
+            </div>
+            <div class="industries-grid">
+                <div class="industries-content">
+                    <h3>You're a fit if:</h3>
+                    <ul class="industries-list">
+                        <li><span class="check-icon">✓</span> Annual shipping spend is $100K–$500K with UPS or FedEx</li>
+                        <li><span class="check-icon">✓</span> Your products are heavy, bulky, or oversized</li>
+                        <li><span class="check-icon">✓</span> You're a B2B or DTC company with $5M–$30M in revenue</li>
+                        <li><span class="check-icon">✓</span> You've negotiated rates before — and still feel like you're overpaying</li>
+                    </ul>
+                </div>
+                <div class="industries-cards">
+                    <a href="furniture-shipping-savings.html" class="industry-card">
+                        <span class="industry-icon">🛋️</span>
+                        <span>Furniture & Home Goods</span>
                     </a>
-                    <a href="mattress-shipping-savings.html" class="bg-white/10 hover:bg-white/20 rounded-lg p-6 text-center transition">
-                        <div class="text-gold text-2xl mb-2">🛏️</div>
-                        <div class="font-semibold">Mattress & Bedding</div>
+                    <a href="mattress-shipping-savings.html" class="industry-card">
+                        <span class="industry-icon">🛏️</span>
+                        <span>Mattress & Bedding</span>
                     </a>
-                    <a href="auto-parts-shipping-savings.html" class="bg-white/10 hover:bg-white/20 rounded-lg p-6 text-center transition">
-                        <div class="text-gold text-2xl mb-2">🔧</div>
-                        <div class="font-semibold">Auto Parts</div>
+                    <a href="auto-parts-shipping-savings.html" class="industry-card">
+                        <span class="industry-icon">🔧</span>
+                        <span>Auto Parts</span>
                     </a>
-                    <a href="building-materials-shipping-savings.html" class="bg-white/10 hover:bg-white/20 rounded-lg p-6 text-center transition">
-                        <div class="text-gold text-2xl mb-2">🏗️</div>
-                        <div class="font-semibold">Building Materials</div>
+                    <a href="building-materials-shipping-savings.html" class="industry-card">
+                        <span class="industry-icon">🏗️</span>
+                        <span>Building Materials</span>
                     </a>
-                    <a href="fitness-shipping-savings.html" class="bg-white/10 hover:bg-white/20 rounded-lg p-6 text-center transition">
-                        <div class="text-gold text-2xl mb-2">🏋️</div>
-                        <div class="font-semibold">Fitness Equipment</div>
+                    <a href="fitness-shipping-savings.html" class="industry-card">
+                        <span class="industry-icon">🏋️</span>
+                        <span>Fitness Equipment</span>
                     </a>
-                    <a href="food-beverage-shipping-savings.html" class="bg-white/10 hover:bg-white/20 rounded-lg p-6 text-center transition">
-                        <div class="text-gold text-2xl mb-2">🍽️</div>
-                        <div class="font-semibold">Food & Beverage</div>
+                    <a href="food-beverage-shipping-savings.html" class="industry-card">
+                        <span class="industry-icon">🍽️</span>
+                        <span>Food & Beverage</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why SmartLogistics Section -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-navy mb-4">4 Out of 5 Companies We Talk to Become Clients</h2>
-                <p class="text-xl text-gray-600">Here's why.</p>
+    <!-- Benefits -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Why SmartLogistics</span>
+                <h2 class="section-title">4 Out of 5 Companies We Talk to Become Clients</h2>
+                <p class="section-subtitle">Here's why.</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="w-12 h-12 bg-navy rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                        </svg>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     </div>
-                    <h3 class="text-lg font-bold text-navy mb-2">We Know What's Possible</h3>
-                    <p class="text-gray-600">Chris spent 13 years inside UPS. He knows which rate categories carriers negotiate — and which ones they hope you never ask about.</p>
+                    <h3>Insider Knowledge</h3>
+                    <p>Chris spent 13 years at UPS. He knows which categories carriers negotiate — and which ones they hope you never ask about.</p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="w-12 h-12 bg-navy rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
-                    <h3 class="text-lg font-bold text-navy mb-2">Speed That Competitors Can't Match</h3>
-                    <p class="text-gray-600">Most shipping consultants take 3–6 months. We can deliver initial savings within days using pre-negotiated rates.</p>
+                    <h3>Speed That Others Can't Match</h3>
+                    <p>Most shipping consultants take 3–6 months. We deliver initial savings within days using pre-negotiated rates.</p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="w-12 h-12 bg-navy rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    <h3 class="text-lg font-bold text-navy mb-2">No Risk. No Retainer.</h3>
-                    <p class="text-gray-600">Gain-share only. We take a percentage of the savings we recover. If we don't save you money, you owe us nothing.</p>
+                    <h3>Zero Risk</h3>
+                    <p>Gain-share only. We take a percentage of savings recovered. If we don't save you money, you owe us nothing.</p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="w-12 h-12 bg-navy rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                        </svg>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                     </div>
-                    <h3 class="text-lg font-bold text-navy mb-2">Specific Before We Start</h3>
-                    <p class="text-gray-600">We give you a dollar estimate before you commit to anything. Not a percentage range — a number.</p>
+                    <h3>Specific Numbers</h3>
+                    <p>We give you a dollar estimate before you commit. Not a percentage range — a number. If it doesn't make sense, we'll tell you.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-navy text-center mb-12">Frequently Asked Questions</h2>
-            <div class="space-y-6">
-                <div class="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 class="text-lg font-bold text-navy mb-2">How does SmartLogistics get paid?</h3>
-                    <p class="text-gray-600">Gain-share only — we take a percentage of the savings we recover, billed quarterly. If we don't save you money, you owe us nothing. There is no retainer, no upfront fee, and no charge if we don't deliver.</p>
+    <!-- FAQ -->
+    <section class="section section-gray">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>How does SmartLogistics get paid?</h3>
+                    <p>Gain-share only — we take a percentage of the savings we recover, billed quarterly. If we don't save you money, you owe us nothing. There is no retainer, no upfront fee, and no charge if we don't deliver.</p>
                 </div>
-                <div class="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 class="text-lg font-bold text-navy mb-2">We already negotiated our rates — can you still help?</h3>
-                    <p class="text-gray-600">Almost certainly yes. Base rates are just one of 250+ line items in a carrier contract. The categories most shippers have never negotiated — large package surcharges, additional handling fees, dimensional weight divisors, and residential delivery premiums — are where the majority of recoverable savings live.</p>
+                <div class="faq-item">
+                    <h3>We already negotiated our rates — can you still help?</h3>
+                    <p>Almost certainly yes. Base rates are just one of 250+ line items in a carrier contract. The categories most shippers have never negotiated — large package surcharges, additional handling fees, dimensional weight divisors, and residential delivery premiums — are where the majority of recoverable savings live.</p>
                 </div>
-                <div class="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 class="text-lg font-bold text-navy mb-2">How long until we see savings?</h3>
-                    <p class="text-gray-600">Initial savings using pre-negotiated rates can be in place in as little as 1 week. Full optimization across all contract line items typically takes 3–6 months.</p>
+                <div class="faq-item">
+                    <h3>How long until we see savings?</h3>
+                    <p>Initial savings using pre-negotiated rates can be in place in as little as 1 week. Full optimization across all contract line items typically takes 3–6 months.</p>
                 </div>
-                <div class="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 class="text-lg font-bold text-navy mb-2">Do I need to switch carriers?</h3>
-                    <p class="text-gray-600">In about 95% of cases, yes. Moving from FedEx to UPS or vice versa is typically required to access the best negotiated rates. We're always transparent about this before you commit — and we handle the transition completely.</p>
+                <div class="faq-item">
+                    <h3>Do I need to switch carriers?</h3>
+                    <p>In about 95% of cases, yes. Moving from FedEx to UPS or vice versa is typically required to access the best negotiated rates. We're always transparent about this before you commit — and we handle the transition completely.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA Section -->
-    <section class="py-20 bg-navy text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Find Out What Grade Your Carrier Contract Gets</h2>
-            <p class="text-xl text-gray-300 mb-8">
-                We run a free benchmark analysis of your current UPS or FedEx rates and give you a grade. Takes 15 minutes. Chris reviews every company personally.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="get-your-free-audit.html" class="inline-block bg-gold hover:bg-gold-dark text-navy font-bold px-8 py-4 rounded-lg text-lg transition">
-                    Get Your Free Benchmark Analysis
-                </a>
-            </div>
-            <p class="mt-6 text-gray-400">
-                Or <a href="shipping-savings-calculator.html" class="text-gold hover:underline">calculate your estimated savings first →</a>
-            </p>
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Find Out What Grade Your Carrier Contract Gets</h2>
+        <p>We run a free benchmark analysis of your current UPS or FedEx rates and give you a grade. Takes 15 minutes. Chris reviews every company personally.</p>
+        <div class="cta-buttons">
+            <a href="get-your-free-audit.html" class="btn btn-primary btn-large">Get Your Free Benchmark Analysis</a>
         </div>
+        <p class="cta-note">Or <a href="shipping-savings-calculator.html">calculate your estimated savings first →</a></p>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="text-2xl font-bold mb-4">Smart<span class="text-gold">LGSTX</span></div>
-                    <p class="text-gray-400">The UPS insider now negotiating for you. Contingency-only shipping cost recovery.</p>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">Smart<span>LGSTX</span></a>
+                    <p>The UPS insider now negotiating for you. Contingency-only shipping cost recovery for companies spending $100K–$500K/year.</p>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="how-it-works.html" class="hover:text-gold">How It Works</a></li>
-                        <li><a href="about.html" class="hover:text-gold">About Chris</a></li>
-                        <li><a href="get-your-free-audit.html" class="hover:text-gold">Free Audit</a></li>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="about.html">About Chris</a></li>
+                        <li><a href="get-your-free-audit.html">Free Audit</a></li>
+                        <li><a href="shipping-savings-calculator.html">Savings Calculator</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-4">Industries</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="furniture-shipping-savings.html" class="hover:text-gold">Furniture & Home Goods</a></li>
-                        <li><a href="mattress-shipping-savings.html" class="hover:text-gold">Mattress & Bedding</a></li>
-                        <li><a href="auto-parts-shipping-savings.html" class="hover:text-gold">Auto Parts</a></li>
-                        <li><a href="fitness-shipping-savings.html" class="hover:text-gold">Fitness Equipment</a></li>
+                <div class="footer-col">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="furniture-shipping-savings.html">Furniture</a></li>
+                        <li><a href="mattress-shipping-savings.html">Mattress</a></li>
+                        <li><a href="auto-parts-shipping-savings.html">Auto Parts</a></li>
+                        <li><a href="fitness-shipping-savings.html">Fitness</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contact</h4>
-                    <p class="text-gray-400">Ready to see what you're leaving on the table?</p>
-                    <a href="get-your-free-audit.html" class="inline-block bg-gold hover:bg-gold-dark text-navy font-semibold px-6 py-3 rounded-lg mt-4 transition">
-                        Get Started
-                    </a>
+                <div class="footer-col">
+                    <h4>Get Started</h4>
+                    <ul>
+                        <li><a href="get-your-free-audit.html">Free Shipping Audit</a></li>
+                        <li><a href="shipping-savings-calculator.html">Calculate Savings</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-500">
+            <div class="footer-bottom">
                 <p>© 2026 SmartLogistics. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
     </script>
 </body>
 </html>

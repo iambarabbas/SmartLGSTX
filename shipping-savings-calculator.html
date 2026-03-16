@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Savings Calculator | SmartLogistics</title>
+    <meta name="description" content="Find out what your shipping is actually costing you. Answer 5 quick questions and get a specific savings estimate based on your product type and carrier spend.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --navy: #001850;
+            --navy-light: #0a2463;
+            --gold: #FADC61;
+            --gold-dark: #E5C94D;
+            --orange: #FF6900;
+            --green: #10b981;
+            --dark: #1a1a2e;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            background: var(--gray-50);
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--navy);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        /* Calculator Container */
+        .calculator-page {
+            padding: 60px 24px 100px;
+        }
+        
+        .calculator-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .calculator-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        
+        .calculator-header p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: var(--gray-200);
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .progress-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .progress-step.active .progress-number {
+            background: var(--navy);
+            color: white;
+        }
+        
+        .progress-step.completed .progress-number {
+            background: var(--green);
+            color: white;
+        }
+        
+        .progress-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+        
+        .progress-step.active .progress-label {
+            color: var(--navy);
+        }
+        
+        /* Calculator Card */
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+        
+        .step-content {
+            padding: 40px;
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .step-subtitle {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            margin-bottom: 32px;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 28px;
+        }
+        
+        .form-group:last-of-type {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 10px;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            background: white;
+            color: var(--gray-800);
+            cursor: pointer;
+            transition: border-color 0.2s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--navy);
+        }
+        
+        .form-select:hover {
+            border-color: var(--gray-300);
+        }
+        
+        /* Radio/Button Groups */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .button-group.cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .button-option {
+            position: relative;
+        }
+        
+        .button-option input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .button-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .button-option label:hover {
+            border-color: var(--gray-300);
+            background: var(--gray-50);
+        }
+        
+        .button-option input:checked + label {
+            border-color: var(--navy);
+            background: rgba(0,24,80,0.05);
+            color: var(--navy);
+        }
+        
+        /* Navigation Buttons */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 24px 40px;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--navy);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--navy-light);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--gray-600);
+            border: 2px solid var(--gray-200);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gray-300);
+            background: var(--gray-50);
+        }
+        
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        
+        .btn-gold:hover {
+            background: var(--gold-dark);
+        }
+        
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Results Section */
+        .results-preview {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .results-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        
+        .results-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+        }
+        
+        .results-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        
+        .results-details {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+            text-align: left;
+        }
+        
+        .results-details h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--gold);
+        }
+        
+        .results-details ul {
+            list-style: none;
+        }
+        
+        .results-details li {
+            font-size: 0.9rem;
+            padding: 6px 0;
+            color: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .results-details li::before {
+            content: '→';
+            color: var(--gold);
+        }
+        
+        /* Email Capture */
+        .email-capture {
+            padding: 40px;
+        }
+        
+        .email-capture h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .email-capture p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+        
+        .email-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .email-form .full-width {
+            grid-column: span 2;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--navy);
+        }
+        
+        .form-input::placeholder {
+            color: var(--gray-400);
+        }
+        
+        .privacy-note {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            margin-top: 16px;
+            text-align: center;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            padding: 40px;
+            text-align: center;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .final-cta h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .final-cta p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            margin-bottom: 20px;
+        }
+        
+        .or-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+        
+        .or-divider::before,
+        .or-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+        
+        .alt-cta {
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .alt-cta:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .calculator-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .progress-bar::before {
+                left: 20px;
+                right: 20px;
+            }
+            
+            .progress-label {
+                display: none;
+            }
+            
+            .step-content {
+                padding: 28px;
+            }
+            
+            .step-nav {
+                padding: 20px 28px;
+            }
+            
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group.cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .email-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .email-form .full-width {
+                grid-column: span 1;
+            }
+            
+            .results-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="logo">Smart<span>LGSTX</span></a>
+            <div class="nav-links">
+                <a href="how-it-works.html">How It Works</a>
+                <a href="about.html">About Chris</a>
+                <a href="get-your-free-audit.html">Free Audit</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Calculator -->
+    <div class="calculator-page">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Find Out What Your Shipping Is Actually Costing You</h1>
+                <p>Answer 4 quick questions. Get a specific savings estimate based on your product type and carrier spend. No commitment required.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">
+                    <div class="progress-number">1</div>
+                    <span class="progress-label">Spend</span>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="progress-number">2</div>
+                    <span class="progress-label">Products</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="progress-number">3</div>
+                    <span class="progress-label">Delivery</span>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="progress-number">4</div>
+                    <span class="progress-label">Results</span>
+                </div>
+            </div>
+
+            <!-- Calculator Card -->
+            <div class="calculator-card">
+                <!-- Step 1: Spend -->
+                <div class="step-content active" id="step1">
+                    <h2 class="step-title">Your Shipping Spend</h2>
+                    <p class="step-subtitle">This helps us estimate your savings potential.</p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Annual Shipping Spend</label>
+                        <select class="form-select" id="annualSpend" required>
+                            <option value="">Select your range...</option>
+                            <option value="50000">Under $50K</option>
+                            <option value="75000">$50K – $100K</option>
+                            <option value="150000">$100K – $200K</option>
+                            <option value="275000">$200K – $350K</option>
+                            <option value="425000">$350K – $500K</option>
+                            <option value="600000">Over $500K</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Primary Carrier</label>
+                        <div class="button-group cols-4">
+                            <div class="button-option">
+                                <input type="radio" name="carrier" id="carrier-ups" value="UPS">
+                                <label for="carrier-ups">UPS</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="carrier" id="carrier-fedex" value="FedEx">
+                                <label for="carrier-fedex">FedEx</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="carrier" id="carrier-both" value="Both">
+                                <label for="carrier-both">Both</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="carrier" id="carrier-other" value="Other">
+                                <label for="carrier-other">Not sure</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Product Category</label>
+                        <select class="form-select" id="productCategory" required>
+                            <option value="">Select your industry...</option>
+                            <option value="furniture">Furniture / Home Goods</option>
+                            <option value="mattress">Mattress / Bedding</option>
+                            <option value="auto">Auto Parts</option>
+                            <option value="building">Building Materials</option>
+                            <option value="fitness">Fitness Equipment</option>
+                            <option value="food">Food & Beverage</option>
+                            <option value="manufacturing">Manufacturing / Industrial</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="step-nav">
+                        <div></div>
+                        <button class="btn btn-primary" onclick="nextStep(1)">
+                            Continue
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Products -->
+                <div class="step-content" id="step2">
+                    <h2 class="step-title">Your Products</h2>
+                    <p class="step-subtitle">This determines which surcharge categories apply to you.</p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Average Package Weight</label>
+                        <select class="form-select" id="packageWeight" required>
+                            <option value="">Select weight range...</option>
+                            <option value="light">Under 5 lbs</option>
+                            <option value="medium">5 – 20 lbs</option>
+                            <option value="heavy">20 – 50 lbs</option>
+                            <option value="very-heavy">50 – 100 lbs</option>
+                            <option value="extra-heavy">100 – 150 lbs</option>
+                            <option value="variable">Variable (wide range)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Package Dimensions</label>
+                        <div class="button-group">
+                            <div class="button-option">
+                                <input type="radio" name="dimensions" id="dim-standard" value="standard">
+                                <label for="dim-standard">Standard / conveyable (regular box shapes)</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="dimensions" id="dim-irregular" value="irregular">
+                                <label for="dim-irregular">Irregular / non-conveyable (awkward shapes)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Packages Per Month (approx.)</label>
+                        <select class="form-select" id="monthlyPackages" required>
+                            <option value="">Select volume...</option>
+                            <option value="50">Under 100</option>
+                            <option value="300">100 – 500</option>
+                            <option value="1250">500 – 2,000</option>
+                            <option value="3500">2,000 – 5,000</option>
+                            <option value="7500">Over 5,000</option>
+                            <option value="0">Not sure</option>
+                        </select>
+                    </div>
+                    
+                    <div class="step-nav">
+                        <button class="btn btn-secondary" onclick="prevStep(2)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button class="btn btn-primary" onclick="nextStep(2)">
+                            Continue
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Delivery -->
+                <div class="step-content" id="step3">
+                    <h2 class="step-title">Your Delivery Mix</h2>
+                    <p class="step-subtitle">This helps us identify your specific surcharge exposure.</p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Delivery Address Type</label>
+                        <div class="button-group">
+                            <div class="button-option">
+                                <input type="radio" name="addressType" id="addr-residential" value="residential">
+                                <label for="addr-residential">Mostly residential (DTC)</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="addressType" id="addr-mixed" value="mixed">
+                                <label for="addr-mixed">Mixed residential & commercial</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="addressType" id="addr-commercial" value="commercial">
+                                <label for="addr-commercial">Mostly commercial / B2B</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="addressType" id="addr-varies" value="varies">
+                                <label for="addr-varies">Varies widely</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Geographic Reach</label>
+                        <select class="form-select" id="geoReach" required>
+                            <option value="">Select coverage...</option>
+                            <option value="local">Primarily local / regional</option>
+                            <option value="national">National (continental US)</option>
+                            <option value="rural">Mix of national + rural/remote</option>
+                            <option value="international">International included</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Have you negotiated carrier rates before?</label>
+                        <div class="button-group">
+                            <div class="button-option">
+                                <input type="radio" name="negotiated" id="neg-recent" value="recent">
+                                <label for="neg-recent">Yes, recently (last 12 months)</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="negotiated" id="neg-old" value="old">
+                                <label for="neg-old">Yes, a few years ago</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="negotiated" id="neg-never" value="never">
+                                <label for="neg-never">No, never formally negotiated</label>
+                            </div>
+                            <div class="button-option">
+                                <input type="radio" name="negotiated" id="neg-unsure" value="unsure">
+                                <label for="neg-unsure">Not sure</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-nav">
+                        <button class="btn btn-secondary" onclick="prevStep(3)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button class="btn btn-primary" onclick="calculateResults()">
+                            See My Results
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Results -->
+                <div class="step-content" id="step4">
+                    <div class="results-preview">
+                        <div class="results-label">Estimated Annual Savings</div>
+                        <div class="results-amount" id="savingsAmount">$45,000 – $75,000</div>
+                        <div class="results-subtitle">Based on your inputs, we estimate you're leaving this much on the table each year.</div>
+                        
+                        <div class="results-details">
+                            <h4>Primary Savings Opportunities</h4>
+                            <ul id="savingsCategories">
+                                <li>Large Package Surcharges</li>
+                                <li>Additional Handling Fees</li>
+                                <li>Residential Delivery Premiums</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="email-capture">
+                        <h3>Want the full breakdown?</h3>
+                        <p>Enter your email to unlock your detailed savings report and a personalized message from Chris.</p>
+                        
+                        <form class="email-form" onsubmit="submitEmail(event)">
+                            <input type="email" class="form-input full-width" placeholder="Email address *" required id="email">
+                            <input type="text" class="form-input" placeholder="First name (optional)" id="firstName">
+                            <input type="text" class="form-input" placeholder="Company name (optional)" id="companyName">
+                            <button type="submit" class="btn btn-gold full-width">Get My Full Savings Report</button>
+                        </form>
+                        
+                        <p class="privacy-note">We'll send you a personalized report. No spam. No cold calls unless you ask.</p>
+                    </div>
+                    
+                    <div class="final-cta">
+                        <h3>Ready to talk now?</h3>
+                        <p>Skip the report and book 15 minutes with Chris directly.</p>
+                        <a href="get-your-free-audit.html" class="btn btn-primary">Book a Call With Chris</a>
+                        
+                        <div class="or-divider">or</div>
+                        
+                        <a href="/" class="alt-cta">← Back to homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Savings rates by vertical (from spec)
+        const verticalRates = {
+            furniture: { low: 0.10, high: 0.20, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Premiums', 'DIM Weight Adjustments'] },
+            mattress: { low: 0.17, high: 0.27, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Premiums'] },
+            auto: { low: 0.10, high: 0.20, surcharges: ['Weight-Based Surcharges', 'Additional Handling Fees', 'DAS Zone Charges'] },
+            building: { low: 0.10, high: 0.20, surcharges: ['Oversize Penalties', 'Additional Handling Fees', 'DAS Zone Expansions'] },
+            fitness: { low: 0.10, high: 0.20, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Premiums'] },
+            food: { low: 0.10, high: 0.18, surcharges: ['Weight Surcharges', 'Residential Delivery Premiums', 'Service Mix Optimization'] },
+            manufacturing: { low: 0.10, high: 0.20, surcharges: ['Additional Handling Fees', 'Oversize Surcharges', 'DAS Zone Charges'] },
+            other: { low: 0.12, high: 0.20, surcharges: ['Surcharge Categories (varies by product)', 'Service Mix Optimization'] }
+        };
+
+        let currentStep = 1;
+
+        function updateProgress(step) {
+            document.querySelectorAll('.progress-step').forEach((el, i) => {
+                el.classList.remove('active', 'completed');
+                if (i + 1 < step) el.classList.add('completed');
+                if (i + 1 === step) el.classList.add('active');
+            });
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            updateProgress(step);
+            currentStep = step;
+        }
+
+        function nextStep(fromStep) {
+            // Basic validation
+            if (fromStep === 1) {
+                if (!document.getElementById('annualSpend').value) {
+                    alert('Please select your annual shipping spend');
+                    return;
+                }
+                if (!document.querySelector('input[name="carrier"]:checked')) {
+                    alert('Please select your primary carrier');
+                    return;
+                }
+                if (!document.getElementById('productCategory').value) {
+                    alert('Please select your product category');
+                    return;
+                }
+            }
+            
+            if (fromStep === 2) {
+                if (!document.getElementById('packageWeight').value) {
+                    alert('Please select your average package weight');
+                    return;
+                }
+                if (!document.querySelector('input[name="dimensions"]:checked')) {
+                    alert('Please select your package dimensions type');
+                    return;
+                }
+            }
+            
+            showStep(fromStep + 1);
+        }
+
+        function prevStep(fromStep) {
+            showStep(fromStep - 1);
+        }
+
+        function calculateResults() {
+            // Get inputs
+            const annualSpend = parseInt(document.getElementById('annualSpend').value) || 200000;
+            const category = document.getElementById('productCategory').value || 'other';
+            const weight = document.getElementById('packageWeight').value;
+            const dimensions = document.querySelector('input[name="dimensions"]:checked')?.value;
+            const addressType = document.querySelector('input[name="addressType"]:checked')?.value;
+            const geoReach = document.getElementById('geoReach').value;
+            const negotiated = document.querySelector('input[name="negotiated"]:checked')?.value;
+
+            // Get base rates
+            let rates = { ...verticalRates[category] };
+            let lowMod = 0;
+            let highMod = 0;
+
+            // Apply modifiers
+            if (weight === 'very-heavy' || weight === 'extra-heavy') {
+                lowMod += 0.02;
+                highMod += 0.02;
+            }
+            
+            if (dimensions === 'irregular') {
+                lowMod += 0.015;
+                highMod += 0.015;
+            }
+            
+            if (addressType === 'residential') {
+                lowMod += 0.02;
+                highMod += 0.02;
+            }
+            
+            if (geoReach === 'rural') {
+                lowMod += 0.01;
+                highMod += 0.01;
+            }
+            
+            if (negotiated === 'never') {
+                highMod += 0.03;
+            } else if (negotiated === 'recent') {
+                lowMod -= 0.02;
+                highMod -= 0.02;
+            }
+            
+            if (annualSpend > 400000) {
+                highMod += 0.01;
+            } else if (annualSpend < 100000) {
+                highMod = 0; // Use low end only
+            }
+
+            // Calculate savings
+            let savingsLow = Math.round(annualSpend * (rates.low + lowMod));
+            let savingsHigh = Math.round(annualSpend * Math.min(rates.high + highMod, 0.30)); // Cap at 30%
+
+            // Ensure low < high
+            if (savingsLow > savingsHigh) savingsLow = savingsHigh;
+
+            // Format currency
+            const formatCurrency = (num) => {
+                if (num >= 1000) {
+                    return '$' + Math.round(num / 1000) + 'K';
+                }
+                return '$' + num.toLocaleString();
+            };
+
+            // Update UI
+            document.getElementById('savingsAmount').textContent = 
+                formatCurrency(savingsLow) + ' – ' + formatCurrency(savingsHigh) + '/year';
+
+            // Update surcharges list
+            const surchargesList = document.getElementById('savingsCategories');
+            surchargesList.innerHTML = rates.surcharges.map(s => `<li>${s}</li>`).join('');
+
+            showStep(4);
+        }
+
+        function submitEmail(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const firstName = document.getElementById('firstName').value;
+            const companyName = document.getElementById('companyName').value;
+            
+            // Here you'd send to your backend/CRM
+            console.log('Lead captured:', { email, firstName, companyName });
+            
+            // Redirect to thank you or booking page
+            alert('Thanks! Check your email for your personalized savings report.');
+            window.location.href = 'get-your-free-audit.html';
+        }
+    </script>
+</body>
+</html>
