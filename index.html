@@ -271,6 +271,19 @@
             flex-wrap: wrap;
         }
         
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
         /* Stats Bar */
         .stats {
             background: var(--navy-light);
@@ -800,6 +813,15 @@
                 padding: 60px 24px 80px;
             }
             
+            .hero-split {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
             .problem-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -876,16 +898,21 @@
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-badge">
-                <span class="hero-badge-dot"></span>
-                Former UPS Executive — 13 Years Setting Carrier Rates
+        <div class="hero-container hero-split">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Former UPS Executive — 13 Years Setting Carrier Rates
+                </div>
+                <h1>You're Overpaying UPS and FedEx. <span class="highlight">We Know Because We Built Their Pricing.</span></h1>
+                <p class="hero-subtitle">SmartLogistics recovers 10–20% of your annual shipping spend by negotiating the 250+ line items your carrier rep hopes you never ask about. Contingency-only — you pay nothing unless we save you money.</p>
+                <div class="hero-buttons">
+                    <a href="get-your-free-audit.html" class="btn btn-primary btn-large">Get Your Free Shipping Audit</a>
+                    <a href="shipping-savings-calculator.html" class="btn btn-outline btn-large">Calculate Your Savings →</a>
+                </div>
             </div>
-            <h1>You're Overpaying UPS and FedEx. <span class="highlight">We Know Because We Built Their Pricing.</span></h1>
-            <p class="hero-subtitle">SmartLogistics recovers 10–20% of your annual shipping spend by negotiating the 250+ line items your carrier rep hopes you never ask about. Contingency-only — you pay nothing unless we save you money.</p>
-            <div class="hero-buttons">
-                <a href="get-your-free-audit.html" class="btn btn-primary btn-large">Get Your Free Shipping Audit</a>
-                <a href="shipping-savings-calculator.html" class="btn btn-outline btn-large">Calculate Your Savings →</a>
+            <div class="hero-image">
+                <img src="images/SmartLogistics Homepage Hero Section.jpg" alt="Executive negotiation meeting">
             </div>
         </div>
     </section>
@@ -922,7 +949,9 @@
                     <p><strong>Large package fees. Additional handling. Residential delivery premiums. Dimensional weight multipliers. Peak season penalties.</strong></p>
                     <p>Your carrier rep's job is to maximize what you pay. Not minimize it. And most companies — even sophisticated ones — have never had someone audit those contracts from the inside.</p>
                 </div>
-                <div class="problem-card">
+                <div>
+                    <img src="images/Homepage_Problem_section.jpg" alt="Carrier invoice with hidden surcharges highlighted" style="width: 100%; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); margin-bottom: 24px;">
+                    <div class="problem-card">
                     <h3>The Hidden Charges on Every Invoice</h3>
                     <ul class="problem-list">
                         <li><span class="x-icon">✕</span> Large Package Surcharges ($20–$50/package)</li>
@@ -932,6 +961,7 @@
                         <li><span class="x-icon">✕</span> Peak Season Penalties</li>
                         <li><span class="x-icon">✕</span> Delivery Area Surcharges (DAS)</li>
                     </ul>
+                    </div>
                 </div>
             </div>
         </div>
