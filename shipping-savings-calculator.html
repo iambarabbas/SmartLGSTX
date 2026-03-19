@@ -87,6 +87,66 @@
             color: white;
         }
         
+        .nav-dropdown {
+            position: relative;
+        }
+        
+        .nav-dropdown-trigger {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-dropdown-trigger:hover {
+            color: white;
+        }
+        
+        .nav-dropdown-trigger svg {
+            width: 12px;
+            height: 12px;
+            opacity: 0.7;
+        }
+        
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            padding: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 8px;
+        }
+        
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--gray-800);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+        
+        .nav-dropdown-menu a:hover {
+            background: var(--gray-100);
+            color: var(--navy);
+        }
+        
         .btn-nav {
             background: var(--gold);
             color: #001850 !important;
@@ -589,9 +649,24 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="/" class="logo">Smart<span>LGSTX</span></a>
+            <a href="index.html" class="logo">Smart<span>LGSTX</span></a>
             <div class="nav-links">
                 <a href="how-it-works.html">How It Works</a>
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-trigger">
+                        Industries
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </span>
+                    <div class="nav-dropdown-menu">
+                        <a href="furniture-shipping-savings.html">Furniture & Home Goods</a>
+                        <a href="mattress-shipping-savings.html">Mattress & Bedding</a>
+                        <a href="auto-parts-shipping-savings.html">Auto Parts</a>
+                        <a href="building-materials-shipping-savings.html">Building Materials</a>
+                        <a href="fitness-shipping-savings.html">Fitness Equipment</a>
+                        <a href="food-beverage-shipping-savings.html">Food & Beverage</a>
+                        <a href="manufacturing-shipping-savings.html">Manufacturing</a>
+                    </div>
+                </div>
                 <a href="about.html">About Us</a>
                 <a href="get-your-free-audit.html" class="btn-nav">Get Your Free Audit</a>
             </div>
@@ -840,7 +915,7 @@
                     
                     <div class="email-capture">
                         <h3>Want the full breakdown?</h3>
-                        <p>Enter your email to unlock your detailed savings report and a personalized message from Chris.</p>
+                        <p>Enter your email to unlock your detailed savings report and a personalized savings report.</p>
                         
                         <form class="email-form" onsubmit="submitEmail(event)">
                             <input type="email" class="form-input full-width" placeholder="Email address *" required id="email">
@@ -854,12 +929,12 @@
                     
                     <div class="final-cta">
                         <h3>Ready to talk now?</h3>
-                        <p>Skip the report and book 15 minutes with Chris directly.</p>
-                        <a href="get-your-free-audit.html" class="btn btn-primary">Book a Call With Chris</a>
+                        <p>Skip the report and book 15 minutes with our team directly.</p>
+                        <a href="get-your-free-audit.html" class="btn btn-primary">Book a Call</a>
                         
                         <div class="or-divider">or</div>
                         
-                        <a href="/" class="alt-cta">← Back to homepage</a>
+                        <a href="index.html" class="alt-cta">← Back to homepage</a>
                     </div>
                 </div>
             </div>
