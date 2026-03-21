@@ -742,7 +742,7 @@
     <!-- Calculator -->
     <div class="calculator-page">
         <div class="calculator-container">
-            <div class="calculator-header">
+            <div class="calculator-header" id="calculatorHeader">
                 <h1>Find Out What Your Shipping Is Actually Costing You</h1>
                 <p>Answer 4 quick questions. Get a specific savings estimate based on your product type and carrier spend. No commitment required.</p>
             </div>
@@ -1038,6 +1038,12 @@
             document.getElementById('step' + step).classList.add('active');
             updateProgress(step);
             currentStep = step;
+            
+            // Hide header on results page (step 4)
+            const header = document.getElementById('calculatorHeader');
+            if (header) {
+                header.style.display = step === 4 ? 'none' : 'block';
+            }
         }
 
         function showError(inputId, errorId, message) {
