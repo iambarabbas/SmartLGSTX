@@ -839,7 +839,7 @@
                     <p class="step-subtitle">This determines which surcharge categories apply to you.</p>
                     
                     <div class="form-group">
-                        <label class="form-label">Average Package Weight</label>
+                        <label class="form-label">Average Package Weight <span style="color: #dc2626;">*</span></label>
                         <select class="form-select" id="packageWeight" required>
                             <option value="">Select weight range...</option>
                             <option value="light">Under 5 lbs</option>
@@ -852,7 +852,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Package Dimensions</label>
+                        <label class="form-label">Package Dimensions <span style="color: #dc2626;">*</span></label>
                         <div class="button-group">
                             <div class="button-option">
                                 <input type="radio" name="dimensions" id="dim-standard" value="standard">
@@ -866,7 +866,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Packages Per Month (approx.)</label>
+                        <label class="form-label">Packages Per Month (approx.) <span style="color: #dc2626;">*</span></label>
                         <select class="form-select" id="monthlyPackages" required>
                             <option value="">Select volume...</option>
                             <option value="50">Under 100</option>
@@ -896,7 +896,7 @@
                     <p class="step-subtitle">This helps us identify your specific surcharge exposure.</p>
                     
                     <div class="form-group">
-                        <label class="form-label">Delivery Address Type</label>
+                        <label class="form-label">Delivery Address Type <span style="color: #dc2626;">*</span></label>
                         <div class="button-group">
                             <div class="button-option">
                                 <input type="radio" name="addressType" id="addr-residential" value="residential">
@@ -918,7 +918,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Geographic Reach</label>
+                        <label class="form-label">Geographic Reach <span style="color: #dc2626;">*</span></label>
                         <select class="form-select" id="geoReach" required>
                             <option value="">Select coverage...</option>
                             <option value="local">Primarily local / regional</option>
@@ -929,7 +929,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Have you negotiated carrier rates before?</label>
+                        <label class="form-label">Have you negotiated carrier rates before? <span style="color: #dc2626;">*</span></label>
                         <div class="button-group">
                             <div class="button-option">
                                 <input type="radio" name="negotiated" id="neg-recent" value="recent">
@@ -1102,12 +1102,14 @@
         }
 
         function nextStep(fromStep) {
-            // Clear any existing error messages
+            // Clear any existing error messages and borders
             document.querySelectorAll('.field-error').forEach(el => el.remove());
+            document.querySelectorAll('.form-select').forEach(el => el.style.borderColor = '');
+            document.querySelectorAll('.button-group').forEach(el => el.style.borderColor = '');
             
             let hasError = false;
             
-            // Basic validation
+            // Step 1 validation
             if (fromStep === 1) {
                 if (!document.getElementById('annualSpend').value) {
                     showFieldError('annualSpend', 'Please select your annual shipping spend');
@@ -1123,6 +1125,7 @@
                 }
             }
             
+            // Step 2 validation - ALL fields required
             if (fromStep === 2) {
                 if (!document.getElementById('packageWeight').value) {
                     showFieldError('packageWeight', 'Please select your average package weight');
@@ -1130,6 +1133,10 @@
                 }
                 if (!document.querySelector('input[name="dimensions"]:checked')) {
                     showFieldError('dimensions', 'Please select your package dimensions type', true);
+                    hasError = true;
+                }
+                if (!document.getElementById('monthlyPackages').value) {
+                    showFieldError('monthlyPackages', 'Please select your monthly package volume');
                     hasError = true;
                 }
             }
@@ -1146,15 +1153,17 @@
             errorEl.textContent = message;
             
             if (isRadio) {
-                const radioGroup = document.querySelector(`input[name="${fieldId}"]`).closest('.radio-group');
-                if (radioGroup) {
-                    radioGroup.appendChild(errorEl);
+                const firstRadio = document.querySelector(`input[name="${fieldId}"]`);
+                const buttonGroup = firstRadio ? firstRadio.closest('.button-group') : null;
+                if (buttonGroup) {
+                    buttonGroup.style.borderColor = '#dc2626';
+                    buttonGroup.insertAdjacentElement('afterend', errorEl);
                 }
             } else {
                 const field = document.getElementById(fieldId);
                 if (field) {
-                    field.insertAdjacentElement('afterend', errorEl);
                     field.style.borderColor = '#dc2626';
+                    field.insertAdjacentElement('afterend', errorEl);
                 }
             }
         }
@@ -1164,6 +1173,29 @@
         }
 
         function calculateResults() {
+            // Clear any existing error messages and borders
+            document.querySelectorAll('.field-error').forEach(el => el.remove());
+            document.querySelectorAll('.form-select').forEach(el => el.style.borderColor = '');
+            document.querySelectorAll('.button-group').forEach(el => el.style.borderColor = '');
+            
+            let hasError = false;
+            
+            // Step 3 validation - ALL fields required
+            if (!document.querySelector('input[name="addressType"]:checked')) {
+                showFieldError('addressType', 'Please select your delivery address type', true);
+                hasError = true;
+            }
+            if (!document.getElementById('geoReach').value) {
+                showFieldError('geoReach', 'Please select your geographic reach');
+                hasError = true;
+            }
+            if (!document.querySelector('input[name="negotiated"]:checked')) {
+                showFieldError('negotiated', 'Please answer if you have negotiated rates before', true);
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
             // Get inputs
             const annualSpend = parseInt(document.getElementById('annualSpend').value) || 200000;
             const category = document.getElementById('productCategory').value || 'other';
