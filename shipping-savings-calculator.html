@@ -968,32 +968,6 @@
                         <div class="results-label">Estimated Annual Savings</div>
                         <div class="results-amount" id="savingsAmount">$45,000 – $75,000</div>
                         <div class="results-subtitle">Based on your inputs, we estimate you're leaving this much on the table each year.</div>
-                        
-                        <div class="results-details">
-                            <h4>Primary Savings Opportunities</h4>
-                            <ul id="savingsCategories">
-                                <li>Large Package Surcharges</li>
-                                <li>Additional Handling Fees</li>
-                                <li>Residential Delivery Premiums</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="email-capture">
-                        <h3>Want the full breakdown?</h3>
-                        <p>Enter your email to unlock your detailed savings report and a personalized savings report.</p>
-                        
-                        <form class="email-form" onsubmit="submitEmail(event)">
-                            <div class="form-group full-width">
-                                <input type="email" class="form-input full-width" placeholder="Email address *" id="email">
-                                <div class="form-error" id="emailError">Please enter a valid email address</div>
-                            </div>
-                            <input type="text" class="form-input" placeholder="First name (optional)" id="firstName">
-                            <input type="text" class="form-input" placeholder="Company name (optional)" id="companyName">
-                            <button type="submit" class="btn btn-gold full-width">Get My Full Savings Report</button>
-                        </form>
-                        
-                        <p class="privacy-note">We'll send you a personalized report. No spam. No cold calls unless you ask.</p>
                     </div>
                     
                     <div class="final-cta">
@@ -1003,7 +977,33 @@
                         
                         <div class="or-divider">or</div>
                         
-                        <a href="index.html" class="alt-cta">← Back to homepage</a>
+                        <h3>Want the full breakdown?</h3>
+                        <p>Enter your email to unlock your detailed savings report.</p>
+                        
+                        <form class="email-form" onsubmit="submitEmail(event)" style="margin-top: 1.5rem;">
+                            <div class="form-group full-width">
+                                <input type="email" class="form-input full-width" placeholder="Email address *" id="email">
+                                <div class="form-error" id="emailError">Please enter a valid email address</div>
+                            </div>
+                            <input type="text" class="form-input" placeholder="First name (optional)" id="firstName">
+                            <input type="text" class="form-input" placeholder="Company name (optional)" id="companyName">
+                            <button type="submit" class="btn btn-gold full-width">Get My Full Savings Report</button>
+                        </form>
+                        
+                        <p class="privacy-note" style="margin-top: 1rem;">We'll send you a personalized report. No spam. No cold calls unless you ask.</p>
+                        
+                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
+                            <a href="index.html" class="alt-cta">← Back to homepage</a>
+                        </div>
+                    </div>
+                    
+                    <div class="results-details" style="margin-top: 2rem;">
+                        <h4>Primary Savings Opportunities</h4>
+                        <ul id="savingsCategories">
+                            <li>Large Package Surcharges</li>
+                            <li>Additional Handling Fees</li>
+                            <li>Residential Delivery Premiums</li>
+                        </ul>
                     </div>
                 </div>
             </div>
