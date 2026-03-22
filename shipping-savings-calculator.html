@@ -1002,7 +1002,7 @@
                         <ul id="savingsCategories">
                             <li>Large Package Surcharges</li>
                             <li>Additional Handling Fees</li>
-                            <li>Residential Delivery Premiums</li>
+                            <li>Residential Delivery Surcharge</li>
                         </ul>
                     </div>
                 </div>
@@ -1013,12 +1013,12 @@
     <script>
         // Savings rates by vertical (from spec)
         const verticalRates = {
-            furniture: { low: 0.10, high: 0.20, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Premiums', 'DIM Weight Adjustments'] },
-            mattress: { low: 0.17, high: 0.27, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Premiums'] },
+            furniture: { low: 0.10, high: 0.20, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Surcharge', 'DIM Weight Adjustments'] },
+            mattress: { low: 0.17, high: 0.27, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Surcharge'] },
             auto: { low: 0.10, high: 0.20, surcharges: ['Weight-Based Surcharges', 'Additional Handling Fees', 'DAS Zone Charges'] },
             building: { low: 0.10, high: 0.20, surcharges: ['Oversize Penalties', 'Additional Handling Fees', 'DAS Zone Expansions'] },
-            fitness: { low: 0.10, high: 0.20, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Premiums'] },
-            food: { low: 0.10, high: 0.18, surcharges: ['Weight Surcharges', 'Residential Delivery Premiums', 'Service Mix Optimization'] },
+            fitness: { low: 0.10, high: 0.20, surcharges: ['Large Package Surcharges', 'Additional Handling Fees', 'Residential Delivery Surcharge'] },
+            food: { low: 0.10, high: 0.18, surcharges: ['Weight Surcharges', 'Residential Delivery Surcharge', 'Service Mix Optimization'] },
             manufacturing: { low: 0.10, high: 0.20, surcharges: ['Additional Handling Fees', 'Oversize Surcharges', 'DAS Zone Charges'] },
             other: { low: 0.12, high: 0.20, surcharges: ['Surcharge Categories (varies by product)', 'Service Mix Optimization'] }
         };
