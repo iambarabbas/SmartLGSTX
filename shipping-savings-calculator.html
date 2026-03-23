@@ -980,13 +980,20 @@
                         <h3>Want the full breakdown?</h3>
                         <p>Enter your email to unlock your detailed savings report.</p>
                         
-                        <form class="email-form" onsubmit="submitEmail(event)" style="margin-top: 1.5rem;">
+                        <form class="email-form" action="https://formspree.io/f/xjgaqarq" method="POST" style="margin-top: 1.5rem;">
+                            <!-- Hidden fields to capture calculator results -->
+                            <input type="hidden" name="estimated_savings" id="formSavings">
+                            <input type="hidden" name="annual_spend" id="formAnnualSpend">
+                            <input type="hidden" name="product_category" id="formCategory">
+                            <input type="hidden" name="primary_carrier" id="formCarrier">
+                            <input type="hidden" name="_subject" value="New Calculator Lead - SmartLGSTX">
+                            
                             <div class="form-group full-width">
-                                <input type="email" class="form-input full-width" placeholder="Email address *" id="email">
+                                <input type="email" class="form-input full-width" placeholder="Email address *" name="email" id="email" required>
                                 <div class="form-error" id="emailError">Please enter a valid email address</div>
                             </div>
-                            <input type="text" class="form-input" placeholder="First name (optional)" id="firstName">
-                            <input type="text" class="form-input" placeholder="Company name (optional)" id="companyName">
+                            <input type="text" class="form-input" placeholder="First name (optional)" name="first_name" id="firstName">
+                            <input type="text" class="form-input" placeholder="Company name (optional)" name="company_name" id="companyName">
                             <button type="submit" class="btn btn-gold full-width">Get My Full Savings Report</button>
                         </form>
                         
@@ -1283,6 +1290,15 @@
                 resultSubtitle.textContent = 'Based on your inputs, we can likely implement these savings within the first week using our optimized rate structures. No upfront cost — you only pay for what you save.';
             }
 
+            // Populate hidden form fields for Formspree submission
+            document.getElementById('formSavings').value = formatCurrency(savingsLow) + ' – ' + formatCurrency(savingsHigh) + '/year';
+            document.getElementById('formAnnualSpend').value = '$' + annualSpend.toLocaleString();
+            document.getElementById('formCategory').value = category;
+            
+            // Get carrier from form
+            const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
+            document.getElementById('formCarrier').value = selectedCarrier ? selectedCarrier.value : 'Not specified';
+            
             showStep(4);
             
             // Show confetti if there are meaningful savings
@@ -1291,26 +1307,8 @@
             }
         }
 
-        function submitEmail(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const firstName = document.getElementById('firstName').value;
-            const companyName = document.getElementById('companyName').value;
-            
-            // Validate email
-            if (!email || !validateEmail(email)) {
-                showError('email', 'emailError', 'Please enter a valid email address');
-                return;
-            }
-            
-            clearError('email', 'emailError');
-            
-            // Here you'd send to your backend/CRM
-            console.log('Lead captured:', { email, firstName, companyName });
-            
-            // Redirect to thank you or booking page
-            window.location.href = 'get-your-free-audit.html';
-        }
+        // Formspree handles form submission natively
+        // No custom JavaScript needed - form submits directly to Formspree
     </script>
     
     <!-- Footer -->
