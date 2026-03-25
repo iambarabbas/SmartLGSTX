@@ -1058,10 +1058,6 @@
                         </form>
                         
                         <p class="privacy-note" style="margin-top: 1rem;">We'll send you a personalized report. No spam. No cold calls unless you ask.</p>
-                        
-                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
-                            <a href="index.html" class="alt-cta">← Back to homepage</a>
-                        </div>
                     </div>
                     
                     <div class="results-details" style="margin-top: 2rem;">
@@ -1393,8 +1389,52 @@
             }
         }
 
-        // Formspree handles form submission natively
-        // No custom JavaScript needed - form submits directly to Formspree
+        // AJAX form submission to Formspree
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailForm = document.querySelector('.email-form');
+            if (emailForm) {
+                emailForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(emailForm);
+                    const submitButton = emailForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.textContent;
+                    
+                    // Disable button and show loading state
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+                    
+                    fetch(emailForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Success - show inline success message
+                            emailForm.innerHTML = `
+                                <div style="text-align: center; padding: 3rem 2rem;">
+                                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem;">Your Report Is On the Way!</h3>
+                                    <p style="color: #64748b; margin-bottom: 1.5rem;">We've sent your personalized savings report to <strong>${formData.get('email')}</strong>.</p>
+                                    <p style="color: #64748b; font-size: 0.875rem;">Check your inbox in the next few minutes. If you don't see it, check your spam folder.</p>
+                                </div>
+                            `;
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    })
+                    .catch(error => {
+                        // Error - show error message
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                        alert('Oops! There was a problem sending your report. Please try again or contact us directly.');
+                    });
+                });
+            }
+        });
     </script>
     
     <!-- Footer -->
