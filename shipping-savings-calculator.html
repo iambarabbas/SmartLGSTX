@@ -845,24 +845,27 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Primary Carrier<span class="required-star">*</span></label>
-                        <div class="button-group cols-4">
+                        <label class="form-label">Primary Carrier <span class="required-star">*</span> <span style="font-size: 0.875rem; color: #64748b;">(Select all that apply)</span></label>
+                        <div class="button-group cols-2">
                             <div class="button-option">
-                                <input type="radio" name="carrier" id="carrier-ups" value="UPS">
+                                <input type="checkbox" name="carrier" id="carrier-ups" value="UPS">
                                 <label for="carrier-ups">UPS</label>
                             </div>
                             <div class="button-option">
-                                <input type="radio" name="carrier" id="carrier-fedex" value="FedEx">
+                                <input type="checkbox" name="carrier" id="carrier-fedex" value="FedEx">
                                 <label for="carrier-fedex">FedEx</label>
                             </div>
                             <div class="button-option">
-                                <input type="radio" name="carrier" id="carrier-both" value="Both">
-                                <label for="carrier-both">Both</label>
+                                <input type="checkbox" name="carrier" id="carrier-notsure" value="Not sure">
+                                <label for="carrier-notsure">Not sure</label>
                             </div>
-                            <div class="button-option">
-                                <input type="radio" name="carrier" id="carrier-other" value="Other">
-                                <label for="carrier-other">Not sure</label>
-                            </div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <label for="carrier-other-text" style="font-size: 0.875rem; color: #475569; margin-bottom: 4px; display: block;">
+                                <input type="checkbox" id="carrier-other-checkbox" style="margin-right: 6px;">
+                                Other (please specify)
+                            </label>
+                            <input type="text" id="carrier-other-text" class="form-select" maxlength="25" placeholder="Enter carrier name..." style="display: none;">
                         </div>
                     </div>
                     
@@ -1148,6 +1151,18 @@
                     }
                 });
             }
+            
+            // Carrier "Other" checkbox toggle
+            const otherCheckbox = document.getElementById('carrier-other-checkbox');
+            const otherTextField = document.getElementById('carrier-other-text');
+            if (otherCheckbox && otherTextField) {
+                otherCheckbox.addEventListener('change', function() {
+                    otherTextField.style.display = this.checked ? 'block' : 'none';
+                    if (!this.checked) {
+                        otherTextField.value = '';
+                    }
+                });
+            }
         });
         
         function showConfetti() {
@@ -1185,8 +1200,15 @@
                     showFieldError('annualSpend', 'Please select your annual shipping spend');
                     hasError = true;
                 }
-                if (!document.querySelector('input[name="carrier"]:checked')) {
-                    showFieldError('carrier', 'Please select your primary carrier', true);
+                const carrierCheckboxes = document.querySelectorAll('input[name="carrier"]:checked');
+                const otherCheckbox = document.getElementById('carrier-other-checkbox');
+                const otherText = document.getElementById('carrier-other-text');
+                
+                if (carrierCheckboxes.length === 0 && (!otherCheckbox || !otherCheckbox.checked)) {
+                    showFieldError('carrier-ups', 'Please select at least one carrier', false);
+                    hasError = true;
+                } else if (otherCheckbox && otherCheckbox.checked && !otherText.value.trim()) {
+                    showFieldError('carrier-other-text', 'Please enter the carrier name', false);
                     hasError = true;
                 }
                 if (!document.getElementById('productCategory').value) {
@@ -1352,9 +1374,16 @@
             document.getElementById('formAnnualSpend').value = '$' + annualSpend.toLocaleString();
             document.getElementById('formCategory').value = category;
             
-            // Get carrier from form
-            const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
-            document.getElementById('formCarrier').value = selectedCarrier ? selectedCarrier.value : 'Not specified';
+            // Get all selected carriers
+            const selectedCarriers = Array.from(document.querySelectorAll('input[name="carrier"]:checked')).map(cb => cb.value);
+            const otherCheckbox = document.getElementById('carrier-other-checkbox');
+            const otherText = document.getElementById('carrier-other-text');
+            
+            if (otherCheckbox && otherCheckbox.checked && otherText.value.trim()) {
+                selectedCarriers.push('Other: ' + otherText.value.trim());
+            }
+            
+            document.getElementById('formCarrier').value = selectedCarriers.length > 0 ? selectedCarriers.join(', ') : 'Not specified';
             
             showStep(4);
             
