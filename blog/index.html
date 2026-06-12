@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Carrier Cost Insights for Shippers | SmartLogistics</title>
+  <meta name="description" content="Insights on carrier surcharges, shipping cost reduction, and rate negotiation for high-volume shippers. Real data, no fluff.">
+  <meta property="og:title" content="Blog | SmartLogistics">
+  <meta property="og:description" content="Insights on carrier surcharges, shipping cost reduction, and rate negotiation for high-volume shippers.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.smartlgstx.com/blog/">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0d1b3e;
+      --gold: #f5c842;
+      --gray-bg: #f5f6f8;
+      --body-text: #4b5563;
+      --navy-mid: #1e3a5f;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--navy); background: #fff; }
+
+    /* NAV */
+    .nav { background: var(--navy); padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { font-size: 1.35rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: var(--gold); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown-trigger svg { width: 14px; height: 14px; }
+    .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--navy); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; min-width: 220px; padding: 8px 0; box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a { display: block; padding: 9px 18px; color: rgba(255,255,255,0.8); font-size: 0.875rem; }
+    .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .btn-nav { background: var(--gold); color: var(--navy) !important; font-weight: 700 !important; padding: 9px 20px; border-radius: 6px; font-size: 0.875rem !important; transition: background 0.2s !important; }
+    .btn-nav:hover { background: #e6b800 !important; }
+    .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: #fff; }
+    .mobile-menu { display: none; background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08); padding: 16px 24px; }
+    .mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 10px 0; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--gold); font-weight: 700; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .mobile-menu.open { display: block; }
+    }
+
+    /* HERO */
+    .blog-hero { background: var(--navy); padding: 72px 24px 60px; text-align: center; }
+    .blog-hero-inner { max-width: 720px; margin: 0 auto; }
+    .blog-hero .label { display: inline-block; background: rgba(245,200,66,0.15); color: var(--gold); font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 4px; margin-bottom: 18px; }
+    .blog-hero h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .blog-hero p { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.6; }
+
+    /* BLOG GRID */
+    .blog-section { background: var(--gray-bg); padding: 64px 24px 80px; }
+    .blog-section-inner { max-width: 1100px; margin: 0 auto; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; margin-top: 16px; }
+    .blog-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); transition: box-shadow 0.2s, transform 0.2s; text-decoration: none; display: flex; flex-direction: column; }
+    .blog-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .blog-card-top { background: var(--navy-mid); padding: 28px 28px 24px; flex: 1; }
+    .blog-card-cat { display: inline-block; background: rgba(245,200,66,0.15); color: var(--gold); font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 14px; }
+    .blog-card h2 { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.35; margin-bottom: 12px; }
+    .blog-card p { color: rgba(255,255,255,0.6); font-size: 0.875rem; line-height: 1.6; }
+    .blog-card-bottom { padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #eef0f4; }
+    .blog-card-meta { color: #9ca3af; font-size: 0.8rem; }
+    .blog-card-read { color: var(--navy); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .blog-card-read svg { width: 14px; height: 14px; }
+
+    /* CTA */
+    .cta-section { background: var(--navy); padding: 64px 24px; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .cta-section p { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 28px; }
+    .btn-gold { display: inline-block; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 1rem; padding: 14px 32px; border-radius: 7px; text-decoration: none; transition: background 0.2s; }
+    .btn-gold:hover { background: #e6b800; }
+
+    /* FOOTER */
+    footer { background: #07111f; padding: 32px 24px; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">Smart<span>LGSTX</span></a>
+    <div class="nav-links">
+      <a href="../how-it-works.html">How It Works</a>
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">
+          Industries
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </span>
+        <div class="nav-dropdown-menu">
+          <a href="../dtc-ecommerce-shipping-savings.html">DTC Ecommerce</a>
+          <a href="../apparel-shipping-savings.html">Apparel</a>
+          <a href="../winery-wine-club-shipping-savings.html">Wineries &amp; Wine Clubs</a>
+          <a href="../olive-oil-dtc-shipping-savings.html">Olive Oil &amp; Specialty Food</a>
+          <a href="../furniture-shipping-savings.html">Furniture &amp; Home Goods</a>
+          <a href="../mattress-shipping-savings.html">Mattress &amp; Bedding</a>
+          <a href="../auto-parts-shipping-savings.html">Auto Parts</a>
+          <a href="../building-materials-shipping-savings.html">Building Materials</a>
+          <a href="../fitness-shipping-savings.html">Fitness Equipment</a>
+          <a href="../food-beverage-shipping-savings.html">Food &amp; Beverage</a>
+          <a href="../manufacturing-shipping-savings.html">Manufacturing</a>
+        </div>
+      </div>
+      <a href="../about.html">About Us</a>
+      <a href="../international-shipping.html">International Shipping</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../get-your-free-audit.html" class="btn-nav">Get Your Free Audit</a>
+    </div>
+    <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle('open')">
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu">
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../about.html">About Us</a>
+    <a href="../international-shipping.html">International Shipping</a>
+    <a href="../dtc-ecommerce-shipping-savings.html">DTC Ecommerce</a>
+    <a href="../apparel-shipping-savings.html">Apparel</a>
+    <a href="../winery-wine-club-shipping-savings.html">Wineries &amp; Wine Clubs</a>
+    <a href="../olive-oil-dtc-shipping-savings.html">Olive Oil &amp; Specialty Food</a>
+    <a href="index.html">Blog</a>
+    <a href="../get-your-free-audit.html">Get Your Free Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="label">Insights</div>
+    <h1>Carrier Cost Intelligence for High-Volume Shippers</h1>
+    <p>Real data on surcharges, rate structures, and what businesses are doing to recover margin. No fluff.</p>
+  </div>
+</section>
+
+<!-- BLOG GRID -->
+<section class="blog-section">
+  <div class="blog-section-inner">
+    <div class="blog-grid">
+
+      <!-- Card 1 -->
+      <a href="blog-wine-club-shipping-2026.html" class="blog-card">
+        <div class="blog-card-top">
+          <div class="blog-card-cat">Wine Club Shipping</div>
+          <h2>The Real Cost of Wine Club Shipping in 2026</h2>
+          <p>Wine club shipping costs have outpaced headline GRI rates for years. A breakdown of every surcharge stacking against your wine club invoices — and what wineries are doing about it.</p>
+        </div>
+        <div class="blog-card-bottom">
+          <span class="blog-card-meta">June 2026 &nbsp;|&nbsp; 8 min read</span>
+          <span class="blog-card-read">Read
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="blog-dtc-bottle-brand-shipping.html" class="blog-card">
+        <div class="blog-card-top">
+          <div class="blog-card-cat">DTC Fulfillment Costs</div>
+          <h2>Why DTC Bottle Brands Are Paying 40-50% of Their Invoice in Surcharges</h2>
+          <p>Glass bottle brands face a surcharge stack unlike any other DTC category. What's actually on your carrier invoice — and why the gap between headline rate increases and real cost growth keeps widening.</p>
+        </div>
+        <div class="blog-card-bottom">
+          <span class="blog-card-meta">June 2026 &nbsp;|&nbsp; 9 min read</span>
+          <span class="blog-card-read">Read
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to See What's in Your Carrier Contract?</h2>
+  <p>Free audit. No commitment. We find what's there — you decide what to do with it.</p>
+  <a href="../get-your-free-audit.html" class="btn-gold">Get Your Free Shipping Audit</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 SmartLogistics. All rights reserved. &nbsp;|&nbsp; <a href="../get-your-free-audit.html">Get Your Free Audit</a> &nbsp;|&nbsp; <a href="../about.html">About Us</a></p>
+</footer>
+
+</body>
+</html>

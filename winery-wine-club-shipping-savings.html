@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine Club Shipping Savings | Reduce Carrier Costs | Smart LGSTX</title>
+  <meta name="description" content="SmartLogistics audits carrier costs for wine clubs and wineries — finding where you're overpaying on residential, adult signature, and fuel surcharges. Book a free shipping audit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b3e;
+      --gold: #f5c842;
+      --gold-dark: #d4a825;
+      --white: #ffffff;
+      --gray-bg: #f5f6f8;
+      --card-border: #e5e7eb;
+      --navy-mid: #1e3a5f;
+      --body-text: #4b5563;
+      --light-text: #6b7280;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--body-text);
+      line-height: 1.6;
+      background: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .nav-logo span {
+      font-weight: 800;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-label {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: default;
+    }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      font-size: 0.875rem !important;
+      white-space: nowrap;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-dark) !important; color: var(--navy) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.02) 40px,
+          rgba(255,255,255,0.02) 80px
+        );
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, rgba(13,27,62,0.6));
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-pill {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.18;
+      max-width: 820px;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-gold:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-outline-dark {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 13px 28px;
+      border-radius: 7px;
+      border: 2px solid rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline-dark:hover { border-color: var(--white); background: rgba(255,255,255,0.06); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--gray-bg);
+      padding: 80px 24px;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--light-text);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* ── SECTION BASE ── */
+    .section-white { background: var(--white); padding: 88px 24px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-header h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2rem);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--body-text);
+      max-width: 700px;
+      line-height: 1.65;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy-mid);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .card-body {
+      font-size: 0.925rem;
+      color: var(--body-text);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .card-note {
+      font-size: 0.8rem;
+      color: var(--light-text);
+      font-style: italic;
+    }
+
+    /* ── CALLOUT BLOCK ── */
+    .callout {
+      background: #fff8e1;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 28px 32px;
+      margin: 56px 0;
+    }
+    .callout-text {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .callout-attr {
+      font-size: 0.875rem;
+      color: var(--light-text);
+      font-weight: 500;
+    }
+
+    /* ── SAVINGS TABLE ── */
+    .savings-section {
+      background: var(--gray-bg);
+      padding: 88px 24px;
+    }
+    .savings-sub {
+      font-size: 0.95rem;
+      color: var(--light-text);
+      margin-top: 8px;
+      margin-bottom: 40px;
+      max-width: 680px;
+    }
+    .savings-table-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.925rem;
+    }
+    thead tr {
+      background: var(--navy);
+    }
+    thead th {
+      color: var(--white);
+      font-weight: 600;
+      padding: 16px 24px;
+      text-align: left;
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+    }
+    tbody tr:nth-child(odd) { background: var(--white); }
+    tbody tr:nth-child(even) { background: #f9fafb; }
+    tbody td {
+      padding: 15px 24px;
+      color: var(--body-text);
+      border-bottom: 1px solid var(--card-border);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody td:first-child { font-weight: 600; color: var(--navy); }
+    .table-footer-note {
+      font-size: 0.82rem;
+      color: var(--light-text);
+      margin-top: 14px;
+      font-style: italic;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .hiw-section { background: var(--white); padding: 88px 24px; }
+    .steps-list {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 760px;
+    }
+    .step {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    .step-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      min-width: 56px;
+      letter-spacing: -0.03em;
+    }
+    .step-content {}
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--body-text);
+      line-height: 1.65;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--gray-bg); padding: 88px 24px; }
+    .faq-list {
+      margin-top: 48px;
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+    }
+    .faq-q-text {
+      font-size: 0.975rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .faq-indicator {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      min-width: 24px;
+      text-align: center;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .faq-indicator {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 600px;
+    }
+    .faq-answer-inner {
+      padding: 0 24px 20px 24px;
+      font-size: 0.925rem;
+      color: var(--body-text);
+      line-height: 1.7;
+      border-top: 1px solid var(--card-border);
+      padding-top: 16px;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--navy);
+      padding: 96px 24px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-outline-white {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 13px 28px;
+      border-radius: 7px;
+      border: 2px solid rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 64px 24px 32px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-logo {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--white);
+      text-decoration: none;
+      margin-bottom: 40px;
+      display: inline-block;
+    }
+    .footer-logo span { font-weight: 800; }
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-col-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+    }
+    .footer-bottom a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+    }
+    .footer-bottom a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .stats-bar { padding: 56px 24px; }
+      .hero h1 { font-size: 1.9rem; }
+      .hero-sub { font-size: 1rem; }
+      .section-white, .savings-section, .hiw-section, .faq-section { padding: 64px 24px; }
+      .footer-cols { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.smartlgstx.com/" class="nav-logo">Smart<span>LGSTX</span></a>
+    <ul class="nav-links">
+      <li><a href="https://www.smartlgstx.com/how-it-works.html">How It Works</a></li>
+      <li><span class="nav-label">Industries</span></li>
+      <li><a href="https://www.smartlgstx.com/about.html">About Us</a></li>
+      <li><a href="https://www.smartlgstx.com/international-shipping.html">International Shipping</a></li>
+      <li><a href="https://www.smartlgstx.com/blog/">Blog</a></li>
+      <li><a href="https://www.smartlgstx.com/get-your-free-audit.html" class="nav-cta">Get Your Free Audit</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-pill">Wineries &amp; Wine Clubs</div>
+    <h1>Wine Club Fulfillment Is Expensive Enough. Your Carrier Contract Shouldn't Make It Worse.</h1>
+    <p class="hero-sub">SmartLogistics audits carrier costs for wineries shipping bottles to their members and finds where you're overpaying. Book a free shipping audit to see what's there.</p>
+    <div class="hero-ctas">
+      <a href="https://www.smartlgstx.com/get-your-free-audit.html" class="btn-gold">Get Your Free Winery Shipping Audit</a>
+      <a href="https://www.smartlgstx.com/shipping-savings-calculator.html" class="btn-outline-dark">Calculate Your Savings</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number">47.9%</div>
+      <div class="stat-label">Cumulative carrier rate increase since 2019</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$15–25</div>
+      <div class="stat-label">In mandatory surcharges added to every wine club label</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">18–24%</div>
+      <div class="stat-label">Typical savings recovered on audited accounts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$0</div>
+      <div class="stat-label">Free audit. No commitment to get started.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>The Wine Club Shipping Problem Compounds With Every Shipment</h2>
+      <p>Every wine club shipment carries a surcharge stack that most wineries never audit. Residential delivery, adult signature, fuel, and additional handling fees add up to 40–50% of a typical wine club invoice — and almost none of it has been professionally negotiated.</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-title">Residential delivery surcharge</div>
+        <p class="card-body">Every club shipment goes to a residential address. This fee jumped 8.4% in January 2026 alone — more than the headline rate increase your carrier announced.</p>
+        <p class="card-note">Applied on every DTC label</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Adult signature required</div>
+        <p class="card-body">Mandatory on all alcohol shipments. No opt-out. At $8.65 per package, it stacks on every single wine club shipment you send.</p>
+        <p class="card-note">$8.65 per package, every time</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Fuel surcharge stack</div>
+        <p class="card-body">Running approximately 19% of the base rate. Calculated on top of the surchargeable base — which means surcharges generate more surcharges.</p>
+        <p class="card-note">~19% on top of base rate</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Additional handling for heavy cases</div>
+        <p class="card-body">A case of wine at 40–60 lbs approaches the weight threshold for additional handling surcharges. Premium wineries using heavy glass trigger this on every case shipped.</p>
+        <p class="card-note">Up to $39.27 per package</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Delivery area surcharges</div>
+        <p class="card-body">Wine club members live everywhere — including rural and extended residential zones that trigger automatic DAS fees stacked on top of residential surcharges.</p>
+        <p class="card-note">$5–21 per package, varies by zone</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Contracts set up for compliance, not optimization</div>
+        <p class="card-body">Most wine club carrier accounts were opened through compliance platforms like ShipCompliant. The surcharge discounts in those default contracts are the ones carriers hope you never question.</p>
+        <p class="card-note">The gap is wide. And it's recoverable.</p>
+      </div>
+    </div>
+
+    <!-- CALLOUT -->
+    <div class="callout">
+      <p class="callout-text">"We spent just over a million dollars on shipping last year — nearly 10% of our total revenue... I'm sure that seeing the $35 shipping on every semi-annual club shipment is something of a drag on our wine club membership."</p>
+      <p class="callout-attr">— Jason Haas, Managing Partner, Tablas Creek Vineyard (February 2026)</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAVINGS TABLE -->
+<section class="savings-section">
+  <div class="section-inner">
+    <h2 style="font-size: clamp(1.6rem, 2.8vw, 2rem); font-weight: 800; color: var(--navy); letter-spacing: -0.02em;">What Wine Club Shippers Typically Recover</h2>
+    <p class="savings-sub">Estimates based on annual carrier spend with major parcel carriers. Actual savings depend on current contract terms and shipping profile.</p>
+    <div class="savings-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Annual Shipping Spend</th>
+            <th>Estimated Recovery</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>$100,000</td><td>$18,000–$24,000 / year</td></tr>
+          <tr><td>$150,000</td><td>$27,000–$36,000 / year</td></tr>
+          <tr><td>$200,000</td><td>$36,000–$48,000 / year</td></tr>
+          <tr><td>$350,000</td><td>$63,000–$84,000 / year</td></tr>
+          <tr><td>$500,000</td><td>$90,000–$120,000 / year</td></tr>
+          <tr><td>$750,000+</td><td>Calculated per engagement</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-footer-note">Free audit. Start with a 30-minute discovery call.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-section">
+  <div class="section-inner">
+    <h2 style="font-size: clamp(1.6rem, 2.8vw, 2rem); font-weight: 800; color: var(--navy); letter-spacing: -0.02em;">From Audit to Savings in Weeks, Not Months</h2>
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Free savings estimate</div>
+          <p class="step-desc">Tell us your approximate wine club size and shipping volume. We give you a specific dollar estimate in 15 minutes — before you share any data.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Full contract audit</div>
+          <p class="step-desc">Submit a CSV or PDF export from your carrier portal. Chris reviews your contract personally — 13+ years on the carrier side means he knows exactly which surcharge categories have room to move and which ones your carrier rep will never bring up.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Savings presented before you commit</div>
+          <p class="step-desc">We show you the specific dollar amount before you decide anything. If the numbers don't work for your situation, we'll tell you that on the call. We only move forward on accounts where meaningful savings actually exist.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Ongoing savings and invoice monitoring</div>
+          <p class="step-desc">Initial savings visible within the first invoice cycle. We continue monitoring, catching overcharges, and filing claims so savings don't erode as carriers adjust rates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <h2 style="font-size: clamp(1.6rem, 2.8vw, 2rem); font-weight: 800; color: var(--navy); letter-spacing: -0.02em;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">How much can a winery save on carrier costs?</span>
+          <span class="faq-indicator">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Most wine club shippers spending $100K–$500K annually with major carriers can recover 18–24% of total carrier spend. A winery with 1,500–2,500 club members typically recovers $30,000–$80,000 annually. Actual savings depend on current contract terms, shipping geography, and surcharge exposure.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">We set up our carrier account through ShipCompliant or WineDirect. Does that affect the audit?</span>
+          <span class="faq-indicator">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes — and it's often why most wineries haven't had their contracts professionally negotiated. Compliance platforms optimize for legal compliance, not carrier contract terms. The surcharge discounts in default compliance-platform accounts are typically the weakest available. That gap is almost always recoverable.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">What does adult signature required cost us annually?</span>
+          <span class="faq-indicator">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Adult signature is mandatory on every alcohol shipment. For a wine club shipping 6,000 packages a year, that is $51,900–$56,100 per year in signature fees alone. The per-package rate is carrier-set, but the discount applied to it in your contract tier is negotiable.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Do we need to switch carriers?</span>
+          <span class="faq-indicator">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">In most cases, yes — switching from one major carrier to the other is typically required to unlock SmartLogistics's pre-negotiated rate tiers. Chris is transparent about this before any commitment.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Is there an upfront cost?</span>
+          <span class="faq-indicator">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. There's no fee to get started. Book a free shipping audit and we'll walk you through what we find. Next steps are discussed after the audit.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">How long does the audit take?</span>
+          <span class="faq-indicator">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The initial savings estimate is 15 minutes. The full audit takes approximately 2 weeks from when you submit carrier data. Negotiation and implementation typically complete within 4–6 weeks.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <h2>Get Your Free Wine Club Shipping Audit</h2>
+  <p>No commitment. Our founder reviews every winery personally. If the savings aren't meaningful for your situation, we'll tell you on the first call.</p>
+  <div class="cta-buttons">
+    <a href="https://www.smartlgstx.com/get-your-free-audit.html" class="btn-gold">Request Your Free Audit</a>
+    <a href="https://www.smartlgstx.com/shipping-savings-calculator.html" class="btn-outline-white">Calculate Your Savings</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="https://www.smartlgstx.com/" class="footer-logo">Smart<span>LGSTX</span></a>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="https://www.smartlgstx.com/how-it-works.html">How It Works</a></li>
+          <li><a href="https://www.smartlgstx.com/about.html">About Us</a></li>
+          <li><a href="https://www.smartlgstx.com/international-shipping.html">International Shipping</a></li>
+          <li><a href="https://www.smartlgstx.com/get-your-free-audit.html">Free Audit</a></li>
+          <li><a href="https://www.smartlgstx.com/shipping-savings-calculator.html">Savings Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Industries</div>
+        <ul>
+          <li><a href="https://www.smartlgstx.com/dtc-ecommerce.html">DTC Ecommerce</a></li>
+          <li><a href="https://www.smartlgstx.com/apparel.html">Apparel</a></li>
+          <li><a href="https://www.smartlgstx.com/furniture.html">Furniture</a></li>
+          <li><a href="https://www.smartlgstx.com/mattress.html">Mattress</a></li>
+          <li><a href="https://www.smartlgstx.com/auto-parts.html">Auto Parts</a></li>
+          <li><a href="https://www.smartlgstx.com/fitness.html">Fitness</a></li>
+          <li><a href="https://www.smartlgstx.com/food-beverage.html">Food &amp; Beverage</a></li>
+          <li><a href="https://www.smartlgstx.com/manufacturing.html">Manufacturing</a></li>
+          <li><a href="https://www.smartlgstx.com/winery-wine-club-shipping-savings.html">Wineries &amp; Wine Clubs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Get Started</div>
+        <ul>
+          <li><a href="https://www.smartlgstx.com/get-your-free-audit.html">Free Shipping Audit</a></li>
+          <li><a href="https://www.smartlgstx.com/shipping-savings-calculator.html">Calculate Savings</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Smart LGSTX. All rights reserved.</p>
+      <a href="tel:+16198468148">+1 (619) 846-8148</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
