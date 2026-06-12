@@ -95,36 +95,27 @@
 
     /* ── HERO ── */
     .hero {
-      background: var(--navy);
       min-height: 560px;
       display: flex;
       align-items: center;
       position: relative;
       overflow: hidden;
+      background-size: cover;
+      background-position: center right;
     }
-    .hero::before {
-      content: '';
+    .hero-overlay {
       position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 40px,
-          rgba(255,255,255,0.02) 40px,
-          rgba(255,255,255,0.02) 80px
-        );
-      pointer-events: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       right: 0;
-      height: 200px;
-      background: linear-gradient(to bottom, transparent, rgba(13,27,62,0.6));
-      pointer-events: none;
+      bottom: 0;
+      background: linear-gradient(90deg,
+        #001850 0%,
+        #001850 35%,
+        rgba(0, 24, 80, 0.85) 55%,
+        rgba(0, 24, 80, 0.6) 75%,
+        rgba(0, 24, 80, 0.35) 100%
+      );
     }
     .hero-inner {
       max-width: 1200px;
@@ -871,7 +862,8 @@
     </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" style="background-image: url('images/wine.jpg');">
+  <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-pill">Wineries &amp; Wine Clubs</div>
     <h1>Wine Club Fulfillment Is Expensive Enough. Your Carrier Contract Shouldn't Make It Worse.</h1>
