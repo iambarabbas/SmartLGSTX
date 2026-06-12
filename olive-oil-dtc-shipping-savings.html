@@ -22,9 +22,9 @@
   .nav-cta { background: #f5c842 !important; color: #0d1b3e !important; padding: 10px 20px !important; border-radius: 6px; font-weight: 700 !important; }
   .nav-cta:hover { background: #e0b020 !important; }
 
-  .hero { position: relative; min-height: 560px; display: flex; align-items: center; background: #0d1b3e; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; opacity: 0.15; }
-  .hero-inner { position: relative; max-width: 780px; padding: 80px 24px; margin: 0 auto; width: 100%; }
+  .hero { position: relative; min-height: 560px; display: flex; align-items: center; overflow: hidden; background-size: cover; background-position: center right; }
+  .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, #001850 0%, #001850 35%, rgba(0,24,80,0.85) 55%, rgba(0,24,80,0.6) 75%, rgba(0,24,80,0.35) 100%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 780px; padding: 80px 24px; margin: 0 auto; width: 100%; }
   .category-pill { display: inline-block; background: #f5c842; color: #0d1b3e; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; margin-bottom: 20px; }
   .hero h1 { font-size: 2.9rem; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 20px; }
   .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin-bottom: 36px; line-height: 1.7; }
@@ -414,8 +414,8 @@
         </div>
     </nav>
 
-<section class="hero">
-  <div class="hero-bg"></div>
+<section class="hero" style="background-image: url('https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1600&q=80');">
+  <div class="hero-overlay"></div>
   <div class="hero-inner">
     <span class="category-pill">Olive Oil &amp; Specialty Food Brands</span>
     <h1>Your Subscription Fulfillment Has a Glass Bottle Surcharge Your Carrier Contract Was Never Built to Handle.</h1>
